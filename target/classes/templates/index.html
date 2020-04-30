@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Spring Boot ajax example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">JavaLab</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height: 500px">
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="getAll">GetAll</button>
+        </div>
+    </div>
+    <div id="users">
+        Employees are:
+
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="getByName">GetAll</button>
+        </div>
+    </div>
+    <label for="name">
+        name
+    </label><input type="text" id="name"/>
+
+    <label for="email">
+        email
+
+    </label><input type="text" id="email"/>
+    <div id="user">
+        Employees are:
+
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $("#getAll").click(function () {
+        fire_ajax_submit();
+    });
+
+    function fire_ajax_submit() {
+        $.ajax({
+            type: "GET",
+            url: "/employees/test",
+            success: function (data) {
+                $('#users').append("<ul id='newList'></ul>");
+                for (cnt = 0; cnt < data.length; cnt++) {
+                    $("#newList").append("<li>" + data[cnt].firstName + ":" + data[cnt].lastName + "</li>");
+                }
+            }
+        });
+
+    }
+
+    $("#getByName").click(function () {
+        getByName();
+    });
+
+    function getByName() {
+        var data = {}                       // empty obj
+        data["name"] = $("#name").val();    //add field name
+        data["email"] = $("#email").val();  // add field email
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            url: "/employees/getByUsername",
+            success: function (data) {
+                $('#user').append("<ul id='newList'></ul>");
+                for (cnt = 0; cnt < data.length; cnt++) {
+                    $("#newList").append("<li>" + data[cnt].firstName + ":" + data[cnt].lastName + "</li>");
+                }
+            }
+        });
+
+    }
+</script>
