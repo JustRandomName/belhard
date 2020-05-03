@@ -8,4 +8,5 @@ import lombok.Setter;
 public class BaseRequestDto {
     private String name;
     private String email;
+    private String email1;
 }
