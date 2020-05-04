@@ -2,14 +2,16 @@ package com.howtodoinjava.demo.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "EMPLOYEES")
+@Table(name = "employee")
 @Getter
 @Setter
 public class Employee {
@@ -26,9 +28,9 @@ public class Employee {
 
     @Column(name = "email", nullable = false, length = 200)
     private String email;
-//
-//    @OneToMany(mappedBy = "employee")
-//    private List<Book> books = new ArrayList<>();
+
+    @OneToMany(fetch = LAZY, mappedBy = "employee")
+    private Set<Book> books = new HashSet<>();
 
     @Override
     public String toString() {

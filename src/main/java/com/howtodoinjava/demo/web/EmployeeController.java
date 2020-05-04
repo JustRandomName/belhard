@@ -1,7 +1,7 @@
 package com.howtodoinjava.demo.web;
 
 import com.howtodoinjava.demo.exception.RecordNotFoundException;
-import com.howtodoinjava.demo.model.BaseRequestDto;
+import com.howtodoinjava.demo.dto.BaseRequestDto;
 import com.howtodoinjava.demo.model.Employee;
 import com.howtodoinjava.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,9 @@ public class EmployeeController {
 
     @GetMapping(value = "/test")
     public ResponseEntity<?> getAllEmployees() {
+        service.getRoom(1L);
+
+        service.getStudent(1L);
         return ResponseEntity.ok(service.getAllEmployees());
     }
 

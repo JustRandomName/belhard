@@ -1,4 +1,4 @@
-package com.howtodoinjava.demo.model;
+package com.howtodoinjava.demo.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,5 +8,4 @@ import lombok.Setter;
 public class BaseRequestDto {
     private String name;
     private String email;
-    private String email1;
 }
